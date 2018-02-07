@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Smartsupp Live Chat integration module.
+ * 
+ * @package   Smartsupp
+ * @author    Smartsupp <vladimir@smartsupp.com>
+ * @link      http://www.smartsupp.com
+ * @copyright 2015 Smartsupp.com
+ * @license   GPL-2.0+
+ *
+ * Plugin Name:       Smartsupp Live Chat
+ * Plugin URI:        http://www.smartsupp.com
+ * Description:       Adds Smartsupp Live Chat code to Magento.
+ * Version:           1.0.0
+ * Author:            Smartsupp
+ * Author URI:        http://www.smartsupp.com
+ * Text Domain:       smartsupp
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
+-->
+<config>
+    <tabs>
+        <smartsupp>
+            <label>Smartsupp</label>
+            <sort_order>999</sort_order>
+        </smartsupp>
+    </tabs> 
+    <sections>
+        <livechat module="livechat" translate="label">
+            <label>Smartsupp Live Chat</label>
+            <tab>smartsupp</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <hint>
+                    <frontend_model>livechat/adminhtml_config_source_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+				
+                <settings module="livechat" translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled module="livechat" translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Show chat box on website.]]></comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <chatid module="livechat" translate="label">
+                            <label>Smartsupp key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <comment><![CDATA[Smartsupp key assigned to your account.]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </chatid>
+                        <chatapi module="livechat" translate="label">
+                            <label>Optional API</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                            <comment><![CDATA[Advanced chat box modifications with Smartsupp API.]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </chatapi>
+                        <force_login module="livechat" translate="label">
+                            <label>Force login</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[If enabled, chat will only show if customer is logged in.]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </force_login>
+                    </fields>
+                </settings>
+				
+                <variables module="livechat" translate="label">
+                    <label>Customer info</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <comment>Show info about your customers (name, email, spend etc.) in Smartsupp dashboard, where your agents can see it. You will find customer info in the right panel while chatting.</comment>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <customerid module="livechat" translate="label">
+                            <label>Customer's ID</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>10</sort_order>
+                            <comment>Shows customer's ID.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customerid>
+                        <customername module="livechat" translate="label">
+                            <label>Customer's Name</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>20</sort_order>
+                            <comment>Shows customer's display name.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customername>
+                        <customeremail module="livechat" translate="label">
+                            <label>Customer's Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>30</sort_order>
+                            <comment>Shows customer's email.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customeremail>
+                        <customerphone module="livechat" translate="label">
+                            <label>Customer's Phone</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>40</sort_order>
+                            <comment>Shows customer's phone.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customerphone>
+                        <customerrole module="livechat" translate="label">
+                            <label>Customer's Role</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>50</sort_order>
+                            <comment>Shows customer's role.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customerrole>
+                        <customerorders module="livechat" translate="label">
+                            <label>Customer's Orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>60</sort_order>
+                            <comment>Shows customer's orders amount.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customerorders>
+                        <customerspendings module="livechat" translate="label">
+                            <label>Customer's Spendings</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>livechat/config_source_showhide</source_model>
+                            <sort_order>70</sort_order>
+                            <comment>Shows customer's cumulative spendings.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customerspendings>
+                    </fields>
+                </variables>
+            </groups>
+        </livechat>
+    </sections>
+</config>

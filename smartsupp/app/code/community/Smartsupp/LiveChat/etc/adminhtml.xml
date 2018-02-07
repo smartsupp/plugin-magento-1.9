@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Smartsupp Live Chat integration module.
+ * 
+ * @package   Smartsupp
+ * @author    Smartsupp <vladimir@smartsupp.com>
+ * @link      http://www.smartsupp.com
+ * @copyright 2015 Smartsupp.com
+ * @license   GPL-2.0+
+ *
+ * Plugin Name:       Smartsupp Live Chat
+ * Plugin URI:        http://www.smartsupp.com
+ * Description:       Adds Smartsupp Live Chat code to Magento.
+ * Version:           1.0.0
+ * Author:            Smartsupp
+ * Author URI:        http://www.smartsupp.com
+ * Text Domain:       smartsupp
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
+-->
+<config>
+    <menu>
+        <customer>
+            <children>
+            <livechat translate="title" module="livechat">
+                <title>Smartsupp Live Chat</title>
+                <action>adminhtml/system_config/edit/section/livechat</action>
+                <sort_order>999</sort_order>
+            </livechat>
+            </children>
+        </customer>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <livechat translate="title" module="livechat">
+                                        <title>Smartsupp Live Chat</title>
+                                    </livechat>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <customer>
+                        <children>
+                            <livechat translate="title" module="livechat">
+                                <title>Smartsupp Live Chat</title>
+                            </livechat>
+                        </children>
+                    </customer>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
