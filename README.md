@@ -4,7 +4,7 @@ Magento plugin.
 
 ## Releases
 
-Go to [releases](https://github.com/smartsupp/smartsupp-plugin-magento/releases) to download plugin `.zip` files
+[Download](https://github.com/smartsupp/smartsupp-plugin-magento/releases) zip files for plugins.
 
 * plugin v2.0.1 (for Magento v2.0)
 * plugin v1.0.1 (for Magento v1.9)
