@@ -1,6 +1,6 @@
 # Smartsupp plugin - Magento 1.9
 
-Download plugin files in .ZIP above.
+Compatibility: versions 1900 - 1938.
 
 ## Copyright
 
