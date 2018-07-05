@@ -1,6 +1,8 @@
 # Smartsupp plugin - Magento 1.9
 
-Compatibility: versions 1900 - 1938.
+## Compatibility
+
+Versions: 1.9.0.0 - 1.9.3.8
 
 ## Copyright
 
