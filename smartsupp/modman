@@ -1,6 +1,0 @@
-app/code/community/Smartsupp/LiveChat
-app/design/frontend/base/default/layout/livechat.xml
-app/design/frontend/base/default/template/livechat
-app/etc/modules/Smartsupp_LiveChat.xml
-app/locale/cs_CZ/Smartsupp_LiveChat.csv
-app/locale/sk_SK/Smartsupp_LiveChat.csv
