@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+    <name>Smartsupp_LiveChat</name>
+    <version>1.1.0</version>
+    <stability>stable</stability>
+    <license uri="http://www.gnu.org/licenses/gpl-2.0.txt">GNU General Public License, version 2</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Smartsupp is a free live chat with visitor recording. Your customers are on your website right now. Chat with them and see what they do.</summary>
+    <description>Smartsupp Live Chat customer service shows you what your customers do on your website. Smartsupp is ideal for increasing leads and sales. Customer service via live chat is similar for your customers as having a personal sales assistant ready to guide them through the purchase process. Companies which use Smartsupp on their websites tell us their customers are 5 times more likely to buy with the chat installed.&#xD;
+&#xD;
+Smartsupp is a combination of live chat and visitor recording, making it the only tool you&#x2019;ll need to get to understand your visitors. With Smartsupp you can chat with visitors in real-time and also watch their behavior on your website. The Smartsupp plugin lets you identify details of your visitors, like their name, email, or other categories you deem important. You can see all these details while chatting with that visitor so that you know who you&#x2019;re chatting with (e.g., Tom Smith, who already spent $800 on your website). The visitor has to be signed in on your website for you to be able to see the info.&#xD;
+&#xD;
+Smartsupp allows you to help your visitors as soon as they need assistance. You&#x2019;re able to answer their questions instantly in the on-site chat box. If you notice similar situations arising, create and use canned replies and automatic messages to save time. With this fully customizable, multi-language live chat, you can increase your sales up to five times. Watch video recordings of any visitor on your website in the Smartsupp dashboard. You&#x2019;ll see their screen, mouse movements, and clicks &#x2014; great for understanding the behavior of your customers. The powerful combination of live chat and visitor recordings lets you know customers&#x2019; needs even before they make a final decision. Smartsupp helps you keep them on the right track.</description>
+    <notes>First stable release prepared for Magento 1 marketplace.</notes>
+    <authors><author><name>Vladimir</name><user>Sandera</user><email>vladimir@smartsupp.com</email></author></authors>
+    <date>2018-12-19</date>
+    <time>14:41:32</time>
+    <contents><target name="magecommunity"><dir name="Smartsupp"><dir name="LiveChat"><dir name="Block"><dir name="Adminhtml"><dir name="Config"><dir name="Source"><file name="Hint.php" hash="a3014fb39c23522f36511e4e0754899b"/></dir></dir></dir><file name="Display.php" hash="f0ebd93c2d8c808cd0c21f4b35df35fa"/></dir><dir name="Helper"><file name="Data.php" hash="e99086b86bef9103907505e5de5455b9"/></dir><dir name="Model"><dir name="Config"><dir name="Source"><file name="Showhide.php" hash="9e5d6a8814d56ced2f8538c677d7e147"/></dir></dir></dir><dir name="controllers"><dir name="Adminhtml"><file name="IndexController.php" hash="2a7315d8442e16194ca590a74a3c7fab"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="8745ece4f4a4e56ffc030f16b17186dc"/><file name="config.xml" hash="0355d3ed55047c6687219c266eb01518"/><file name="system.xml" hash="ffbad8a6670dade929f0d01f1812bec1"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="smartsupp_livechat.xml" hash="2dd655c212563c8a5157a9a8e66a856b"/></dir><dir name="template"><dir name="livechat"><file name="widget.phtml" hash="21cc853282d8875914b71bccd9fc8ac5"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Smartsupp_LiveChat.xml" hash="f662d4717bfda4668acca76f17e3b7ab"/></dir></target><target name="magelocale"><dir><dir name="cs_CZ"><file name="Smartsupp_LiveChat.csv" hash="5fba573b1723bc948c1869c4361d9a08"/></dir><dir name="sk_SK"><file name="Smartsupp_LiveChat.csv" hash="84040aece5ceff786ea1d3e81768ea35"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>7.0.99</max></php></required></dependencies>
+</package>
