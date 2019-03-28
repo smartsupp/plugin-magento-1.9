@@ -21,26 +21,35 @@
 ?>
 
 <?php if ($this->getKey()): ?>
-<script type="text/javascript">
-<?php if ($this->getVariablesJs()): ?>
-var prSmartsuppVars = {<?php echo $this->getVariablesJs(); ?>};
-<?php endif ?>
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = '<?php echo $this->getKey(); ?>';
-_smartsupp.cookieDomain = '<?php echo $this->getCookieDomain(); ?>';
-window.smartsupp||(function(d) {
-    var o=smartsupp=function(){ o._.push(arguments)},s=d.getElementsByTagName('script')[0],c=d.createElement('script');o._=[];
-    c.async=true;c.type='text/javascript';c.charset='utf-8';c.src='//www.smartsuppchat.com/loader.js';s.parentNode.insertBefore(c,s);
-})(document);
-<?php if ($this->getDashboardName()): ?>
-smartsupp("name", "<?php echo $this->getDashboardName(); ?>");
-<?php endif ?>
-<?php if ($this->getVariablesJs()): ?>
-smartsupp("variables", prSmartsuppVars);
-<?php endif ?>
-<?php if ($this->getOptionalApiJs()): 
-echo $this->getOptionalApiJs(); 
-endif ?>
+    <script type="text/javascript">
+        <?php if ($this->getVariablesJs()):
+            // @codingStandardsIgnoreStart escaped in Display block
+            echo 'var prSmartsuppVars = {' . $this->getVariablesJs() . '}';
+            // @codingStandardsIgnoreEnd
+        endif ?>
 
-</script>
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '<?php echo $this->escapeHtml($this->getKey()); ?>';
+        _smartsupp.cookieDomain = '<?php echo $this->escapeHtml($this->getCookieDomain()); ?>';
+        window.smartsupp||(function(d) {
+            var o=smartsupp=function(){ o._.push(arguments)},s=d.getElementsByTagName('script')[0],
+                c=d.createElement('script');o._=[];
+            c.async=true;c.type='text/javascript';c.charset='utf-8';c.src='//www.smartsuppchat.com/loader.js';
+            s.parentNode.insertBefore(c,s);
+        })(document);
+
+        <?php if ($this->getDashboardName()): ?>
+            smartsupp("name", "<?php echo $this->jsQuoteEscape($this->getDashboardName()); ?>");
+        <?php endif ?>
+
+        <?php if ($this->getVariablesJs()): ?>
+            smartsupp("variables", prSmartsuppVars);
+        <?php endif ?>
+
+        <?php if ($this->getOptionalApiJs()):
+            // @codingStandardsIgnoreStart admin input to customize via Smartsupp API. It is intented not to be escaped
+            echo $this->getOptionalApiJs();
+            // @codingStandardsIgnoreEnd
+        endif ?>
+    </script>
 <?php endif ?>

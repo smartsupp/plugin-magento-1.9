@@ -24,130 +24,158 @@ class Smartsupp_LiveChat_Block_Display extends Mage_Core_Block_Template
     public function getChatApi()
     {
         if (strlen(trim(Mage::helper('livechat')->getChatApi())) > 1) {
-            return $this->jsQuoteEscape(Mage::helper('livechat')->getChatApi());
+            // intended to be NOT escaped
+            return Mage::helper('livechat')->getChatApi();
         }
-        return null;
+
+        return '';
     }
-	
+    
     public function getCustomerId()
     {
         if (Mage::helper('livechat')->getCustomerId()) {
-            return 'id : {label: "' . Mage::helper('livechat')->__('ID') . '", value: "' . $this->jsQuoteEscape(Mage::helper('customer')->getCurrentCustomer()->getId()) . '"},';
+            $customer = Mage::helper('customer')->getCurrentCustomer();
+            $customerId = $customer->getId();
+
+            return 'id : {label: "' . Mage::helper('livechat')->__('ID') . '", value: "' . $customerId . '"},';
         }
+
         return null;
     }
 
     public function getCustomerName()
     {
         if (Mage::helper('livechat')->getCustomerName()) {
-            return 'name : {label: "' . Mage::helper('livechat')->__('Name') . '", value: "' . $this->jsQuoteEscape(Mage::helper('customer')->getCurrentCustomer()->getFirstname() . ' ' . Mage::helper('customer')->getCurrentCustomer()->getLastname()) . '"},';
+            $customer = Mage::helper('customer')->getCurrentCustomer();
+            $customerName = $this->jsQuoteEscape($customer->getFirstname() . ' ' . $customer->getLastname());
+
+            return 'name : {label: "' . Mage::helper('livechat')->__('Name') . '", value: "' . $customerName . '"},';
         }
+
         return null;
-    }	
-	
+    }    
+    
     public function getCustomerEmail()
     {
         if (Mage::helper('livechat')->getCustomerEmail()) {
-            return 'email : {label: "' . Mage::helper('livechat')->__('Email') . '", value: "' . $this->jsQuoteEscape(Mage::helper('customer')->getCurrentCustomer()->getEmail()) . '"},';
+            $customer = Mage::helper('customer')->getCurrentCustomer();
+            $customerEmail = $this->jsQuoteEscape($customer->getEmail());
+
+            return 'email : {label: "' . Mage::helper('livechat')->__('Email') . '", value: "' . $customerEmail . '"},';
         }
+
         return null;
     }
 
     public function getCustomerPhone()
     {
-        if (Mage::helper('livechat')->getCustomerPhone() && Mage::helper('customer')->getCurrentCustomer()->getPrimaryBillingAddress()) {
-            return 'phone : {label: "' . Mage::helper('livechat')->__('Phone') . '", value: "' . $this->jsQuoteEscape(Mage::helper('customer')->getCurrentCustomer()->getPrimaryBillingAddress()->getTelephone()) . '"},';
+        $customer = Mage::helper('customer')->getCurrentCustomer();
+
+        if (Mage::helper('livechat')->getCustomerPhone() && $customer->getPrimaryBillingAddress()) {
+            $customerPhone = $this->jsQuoteEscape($customer->getPrimaryBillingAddress()->getTelephone());
+
+            return 'phone : {label: "' . Mage::helper('livechat')->__('Phone') . '", value: "' . $customerPhone . '"},';
         }
+
         return null;
     }
 
     public function getCustomerRole()
     {
         if (Mage::helper('livechat')->getCustomerRole()) {
-            return 'role : {label: "' . Mage::helper('livechat')->__('Role') . '", value: "' . $this->jsQuoteEscape(Mage::getModel('customer/group')->load(Mage::getSingleton('customer/session')->getCustomerGroupId())->getCustomerGroupCode()) . '"},';
+            $customerGroupId = Mage::getSingleton('customer/session')->getCustomerGroupId();
+            $customerGroup = Mage::getModel('customer/group')->load($customerGroupId)->getCustomerGroupCode();
+            $customerGroup = $this->jsQuoteEscape($customerGroup);
+
+            return 'role : {label: "' . Mage::helper('livechat')->__('Role') . '", value: "' . $customerGroup . '"},';
         }
+
         return null;
     }
 
     public function getCustomerSpendings()
     {
-        $orders = Mage::getModel('sales/order')->getCollection()->addAttributeToFilter('customer_email', Mage::helper('customer')->getCurrentCustomer()->getEmail())->addFieldToFilter('status', 'complete');
+        $customerEmail = Mage::helper('customer')->getCurrentCustomer()->getEmail();
 
-        $spendings = 0;
+        $orders = Mage::getModel('sales/order')->getCollection()
+            ->addAttributeToFilter('customer_email', $customerEmail)
+            ->addFieldToFilter('status', 'complete');
+
+        $spend = 0;
         foreach ($orders as $order) {
-            $spendings += $order->getGrandTotal();
+            $spend += $order->getGrandTotal();
         }
+
         if (Mage::helper('livechat')->getCustomerSpendings()) {
-            return 'spendings : {label: "' . Mage::helper('livechat')->__('Spendings') . '", value: "' . $this->jsQuoteEscape($spendings) . '"},';
+            return 'spendings : {label: "' . Mage::helper('livechat')->__('Spendings') . '", value: "' . $spend . '"},';
         }
+
         return null;
     }
 
     public function getCustomerOrders()
     {
-        $orders = Mage::getModel('sales/order')->getCollection()->addAttributeToFilter('customer_email', Mage::helper('customer')->getCurrentCustomer()->getEmail())->addFieldToFilter('status', 'complete');
+        $customerEmail = Mage::helper('customer')->getCurrentCustomer()->getEmail();
+
+        $orders = Mage::getModel('sales/order')->getCollection()
+            ->addAttributeToFilter('customer_email', $customerEmail)
+            ->addFieldToFilter('status', 'complete');
 
         $count = 0;
         foreach ($orders as $order) {
                 $count++;
         }
+
         if (Mage::helper('livechat')->getCustomerOrders()) {
-            return 'orders : {label: "' . Mage::helper('livechat')->__('Orders') . '", value: "' . $this->jsQuoteEscape($count) . '"},';
+            return 'orders : {label: "' . Mage::helper('livechat')->__('Orders') . '", value: "' . $count . '"},';
         }
+
         return null;
     }
 
     protected function _toHtml()
     {
-        if (!Mage::helper('livechat')->getEnabled()) {
-        	return null;
-		}
+        /**
+         * @var Smartsupp_LiveChat_Helper_Data $liveChatHelper
+         */
+        $liveChatHelper = Mage::helper('livechat');
 
-		if (Mage::helper('livechat')->getForceLogin() && !Mage::getSingleton('customer/session')->isLoggedIn()) {
-			return null;
-		}
-
-        if (strlen($this->getChatApi()) > 0) {
-            $smartsupp_api_js = $this->getChatApi();
-        } else {
-            $smartsupp_api_js = '';
+        if (!$liveChatHelper->getEnabled()) {
+            return null;
         }
 
-        $smartsupp_variables_js = '';
+        if ($liveChatHelper->getForceLogin() && !Mage::getSingleton('customer/session')->isLoggedIn()) {
+            return null;
+        }
+
+        $smartsuppApiJs = $this->getChatApi();
+        $smartsuppVariablesJs = '';
+
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-            if ($this->getCustomerId()) {
-                $smartsupp_variables_js .= $this->getCustomerId();
-            }
-            if ($this->getCustomerName()) {
-                $smartsupp_variables_js .= $this->getCustomerName();
-            }
-            if ($this->getCustomerEmail()) {
-                $smartsupp_variables_js .= $this->getCustomerEmail();
-            }
-            if ($this->getCustomerPhone()) {
-                $smartsupp_variables_js .= $this->getCustomerPhone();
-            }
-            if ($this->getCustomerRole()) {
-                $smartsupp_variables_js .= $this->getCustomerRole();
-            }
-            if ($this->getCustomerSpendings()) {
-                $smartsupp_variables_js .= $this->getCustomerSpendings();
-            }
-            if ($this->getCustomerOrders()) {
-                $smartsupp_variables_js .= $this->getCustomerOrders();
+            $variables = array('id', 'name', 'email', 'phone', 'role', 'spendings', 'orders');
+
+            foreach ($variables as $variableName) {
+                $methodName = 'getCustomer' . ucfirst($variableName);
+                $value = $this->$methodName();
+
+                if ($value) {
+                    $smartsuppVariablesJs .= $value;
+                }
             }
         }
-        
+
+        $customer = Mage::helper('customer')->getCurrentCustomer();
+
         $block = $this->getLayout()->createBlock(
             'core/template',
             'smartsupp_livechat',
             array(
                 'template' => 'livechat/widget.phtml',
                 'key' => Mage::helper('livechat')->getChatId(),
-                'dashboard_name' => $this->jsQuoteEscape(Mage::helper('customer')->getCurrentCustomer()->getFirstname() . ' ' . Mage::helper('customer')->getCurrentCustomer()->getLastname()),
-                'optional_api_js' => $smartsupp_api_js,
-                'variables_js' => $this->jsQuoteEscape($smartsupp_variables_js),
-                'cookie_domain' => '', //$this->getModel()->getCookie()->getDomain(),
+                'dashboard_name' => $customer->getFirstname() . ' ' . $customer->getLastname(),
+                'optional_api_js' => $smartsuppApiJs,
+                'variables_js' => $smartsuppVariablesJs,
+                'cookie_domain' => '',
             )
         );
 

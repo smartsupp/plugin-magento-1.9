@@ -25,4 +25,9 @@ class Smartsupp_LiveChat_Adminhtml_IndexController extends Mage_Adminhtml_Contro
     {
         $this->_redirectUrl(Smartsupp_LiveChat_Helper_Data::SMARTSUPP_DASHBOARD_URL);
     }
+
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('smartsupp/livechat');
+    }
 }

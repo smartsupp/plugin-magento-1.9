@@ -33,22 +33,22 @@ class Smartsupp_LiveChat_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig('livechat/settings/chatid');
     }
-	
+    
     public function getChatApi ()
     {
         return Mage::getStoreConfig('livechat/settings/chatapi');
     }
-	
-	public function getForceLogin ()
+    
+    public function getForceLogin ()
     {
         return Mage::getStoreConfigFlag('livechat/settings/force_login');
     }
-	
+    
     public function getCustomerId ()
     {
         return Mage::getStoreConfigFlag('livechat/variables/customerid');
     }
-	
+    
     public function getCustomerName ()
     {
         return Mage::getStoreConfigFlag('livechat/variables/customername');
