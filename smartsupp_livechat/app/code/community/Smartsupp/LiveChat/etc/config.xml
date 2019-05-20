@@ -12,7 +12,7 @@
  * Plugin Name:       Smartsupp Live Chat
  * Plugin URI:        http://www.smartsupp.com
  * Description:       Adds Smartsupp Live Chat code to Magento.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Smartsupp
  * Author URI:        http://www.smartsupp.com
  * Text Domain:       smartsupp
@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Smartsupp_LiveChat>
-            <version>1.1.0</version>
+            <version>1.1.1</version>
         </Smartsupp_LiveChat>
     </modules>
 
